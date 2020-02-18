@@ -1,0 +1,37 @@
+"description": "party invitations for a party",
+"createDate": "2019-09-12",
+"dueDate": "2019-09-30",
+"category": "invitations"
+
+"description": "party invitations for a party",
+"createDate": "2019-09-22",
+"dueDate": "2019-09-30",
+"category": "invitations"
+
+"description": "dinner invitations for a dinner",
+"createDate": "2019-09-21",
+"dueDate": "2019-09-30",
+"category": "invitations"
+
+"description": "do homework",
+"createDate": "2019-09-28",
+"dueDate": "2019-09-30",
+"category": "homework"
+
+"description": "sell bicycle",
+"createDate": "2019-09-28",
+"dueDate": "2019-09-30",
+"category": "to-do task"
+
+"description": "sell old laptop",
+"createDate": "2019-09-28",
+"dueDate": "2019-09-30",
+"category": "to-do task"
+
+PUT
+    "id": 1,
+    "description": "party invitations for a party",
+    "createDate": "2019-09-27",
+    "dueDate": "2019-09-30",
+    "category": "invitations",
+    "advertisement": "Click HERE to qualify for a new car loan!"

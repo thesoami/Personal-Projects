@@ -1,0 +1,159 @@
+openapi: 3.0.0
+info:
+  title: Tasker-Service
+  description: Rest Service that maintains a task-service Database with the relevant info pertaining to Tasks,Description,createDate, dueDate, and category of tasks
+  version: 0.0.1
+servers: 
+  - url: 'http://localhost:8080'
+    description: Local dev server
+paths:
+  /tasks:
+    post:
+      summary: Creates a task-view-model which also includes a random ad
+      description: taskId is a primary key, auto increment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tvm'
+      responses:
+        '200':
+          description: a task view model with advertisment appended (Apart of obj)
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/tvm'
+     
+    get:
+      summary: returns a list of tasks 
+      responses:
+        '200':
+          description: a list of task view models
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/tvm'
+ /tasks/{id}:
+  get:
+    summary: retrieves a single task-view model (tvm) by id
+    description: taskId is a primary key
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: taskId to retrieve a task based on the task table
+        schema:
+          type: number
+          format: int 64
+          minimum: 1
+          maximum: 10000
+    responses:
+      '200':
+        desciption:
+        content:
+          application/json:
+            schema:
+              type: object
+              items:
+                $ref: '#/components/schemas/tvm'
+  put:
+    summary: updates a single task obj, not the advertisement
+    desciption: id is a primary key
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description:  taskId for a specific task
+        schema:
+          type: number
+          format: int64
+          minimum: 1
+          maximum: 10000
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/tvm'
+    responses:
+      '200':
+        description: an object of task
+        content:
+          application/json:
+            schema:
+              type: object
+              items:
+                $ref: '#/components/schemas/tvm'
+  delete:
+    summary: deletes a single task obj
+    desciption: taskId is a primary key
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: taskId for a specific task to be deleted
+        schema:
+          type: number
+          format: int64
+          minimum: 1
+          maximum: 10000
+    responses:
+      '200':
+        desciption: nothing 
+/tasks/category/{category}:
+  get:
+    summary: gets a task by a category
+        summary: retrieves a single task-view model (tvm) by id
+    description: category is a foreign key
+    parameters:
+      - name: category
+        in: path
+        required: true
+        description: taskId to retrieve a task based on the task table
+        schema:
+          type: string
+    responses:
+      '200':
+        desciption:
+        content:
+          application/json:
+            schema:
+              type: object
+              items:
+                $ref: '#/components/schemas/tvm'
+                
+                
+                
+components:
+  schemas:
+    tvm:
+      type: object
+        properties:
+          taskId: 
+            type: number
+          description:
+            type: string
+          createDate:
+            type: date 
+          dueDate:
+            type: date
+          category:
+            type: string
+          advertisement:
+            type: string
+        
+    
+  
+        
+  
+      
+      
+  
+    
+    
+  

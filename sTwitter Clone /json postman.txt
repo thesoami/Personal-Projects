@@ -1,0 +1,15 @@
+
+
+{
+
+	"postContent": "Adriana is wicked cool and ambitious and sweet",
+	"postDate": "29/9/2019",
+	"posterName": "swamz",
+	"comments":[ {
+        "postId": 1,
+        "createDate": "28/09/2019",
+        "commenterName": "swamz",
+        "comment": "Adriana is wicked cool and ambitious and sweet"
+    } ]
+}
+

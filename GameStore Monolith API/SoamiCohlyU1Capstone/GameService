@@ -1,0 +1,611 @@
+openapi: 3.0.0
+info:
+  title: Game Store Service
+  description: Rest Service that maintains a gamestore Database with the relevant info pertaining to Game,Console,T-shirt sales, which require user to input Name,Street, City, State, Zip, Item Type, Item ID, Quantity
+  version: 0.0.1
+servers:
+  - url: 'http://localhost:8080'
+    description: Local dev server
+paths:
+  /games:
+    get:
+      summary: Retrieves all Games in inventory
+      responses:
+        '200':
+          description: A list of Games
+          content:
+            application/json:
+              schema:
+                type: objects
+                items:
+                  $ref:'#/components/schemas/Game'
+        '414':
+          description: URI too long
+  /game:
+    post:
+      summary: Creates a single game based on gameId
+      description: gameId is auto-increment
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: gameId to create a game in inventory
+          schema:
+            type: number
+            format: int64
+            minimum: 1
+            maximum: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Game'
+      responses:
+        '200':
+          description: An object of game
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Game'
+        '414':
+          description: URI too long
+
+    delete:
+      summary: Deletes a single game based on id
+      description: gameId is used to identify which game to delete
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: gameId for a specific game
+          schema:
+            type: number
+            format: int64
+            minimum: 1
+            maximum: 100
+      responses:
+        '200':
+          description: a delete message
+          content:
+            application/json:
+              schema:
+                type: string
+                items:
+                  $ref: '#/components/schemas/Game'
+        '414':
+          description: URI too long
+    put:
+      summary: Updates a single game based on id
+      description: gameId is used
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: gameId for a specific game
+          schema:
+            type: number
+            format: int64
+            minimum: 1
+            maximum: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Game'
+      responses:
+        '200':
+          description: an object of Game
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Game'
+        '414':
+          description: URI too long
+  /game/{studio}:
+    get:
+      summary: retrieves a game by studio
+      description: studio an identifying feature for game
+      parameters:
+        - name: studio
+          in: path
+          required: true
+          description: studio to retrieve a game by
+          schema:
+            type: string
+      responses:
+        '200':
+          description: an object of game
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Game'
+        '414':
+          description: URI too long
+  /game/{rating}:
+    get:
+      summary: retrieves a game by rating
+      description: rating used to identify games being searched
+      parameters:
+        - name: rating
+          in: path
+          required: true
+          description: rating used to retrieve game by
+          schema:
+            type: char(or string?)
+      responses:
+        '200':
+          description: an object of game
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Game'
+        '414':
+          description: URI too long
+  /game/{title}:
+    get:
+      summary: retrieves a game by title
+      description: title used to identify games by
+      parameters:
+        - name: title
+          in: path
+          required: true
+          description: user specified titled to retrieve games by
+          schema:
+            type: string
+      responses:
+
+        '200':
+          description: an object of type game
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Game'
+        '414':
+          description: URI too long
+  /consoles:
+    get:
+      summary: Retrieves all Consoles in inventory
+      responses:
+        '200':
+          description: A list of consoles
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref:'#/components/schemas/Console'
+        '414':
+          description: URI too long
+  /console:
+    post:
+      summary: Creates a single console based on gameId
+      description: consoleId is auto-increment
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: consoleId to create a console in inventory
+          schema:
+            type: number
+            format: int64
+            minimum: 1
+            maximum: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Console'
+      responses:
+        '200':
+          description: An object of console
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Console'
+        '414':
+          description: URI too long
+    delete:
+      summary: Deletes a single console based on id
+      description: gameId is used to identify which game to delete
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: gameId for a specific game
+          schema:
+            type: number
+            format: int64
+            minimum: 1
+            maximum: 100
+      responses:
+        '200':
+          description: a delete message
+          content:
+            application/json:
+              schema:
+                type: string
+                items:
+                  $ref: '#/components/schemas/Game'
+        '414':
+          description: URI too long
+    put:
+      summary: Updates a single console based on id
+      description: consoleId is used
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: consoleId for a specific console
+          schema:
+            type: number
+            format: int64
+            minimum: 1
+            maximum: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Console'
+      responses:
+        '200':
+          description: an object of console
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Console'
+        '414':
+          description: URI too long
+  /console/{manufacturer}:
+    get:
+      summary: retrieves a console by manufacturer
+      description: manufacturer used to identify console by
+      parameters:
+        - name: title
+          in: path
+          required: true
+          description: user specified manufacturer to retrieve console by
+          schema:
+            type: string
+      responses:
+
+        '200':
+          description: an object of type console
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Console'
+        '414':
+          description: URI too long
+    /tshirts:
+      get:
+        summary: Retrieves all T-Shirts in inventory
+        responses:
+          '200':
+            description: A list of T-Shirts
+            content:
+              application/json:
+                schema:
+                  type: objects
+                  items:
+                    $ref:'#/components/schemas/T-Shirt'
+          '414':
+            description: URI too long
+  /tshirt:
+    post:
+      summary: Creates a single T-Shirt based on T-ShirtId
+      description: T-ShirtId is auto-increment
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: T-ShirtId to create a T-Shirt in inventory
+          schema:
+            type: number
+            format: int64
+            minimum: 1
+            maximum: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/T-Shirt'
+      responses:
+        '200':
+          description: An object of T-Shirt
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/T-Shirt'
+        '414':
+          description: URI too long
+
+    delete:
+      summary: Deletes a single T-Shirt  based on id
+      description: T-ShirtId is used to identify which T-Shirt  to delete
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: T-ShirtId for a specific T-Shirt
+          schema:
+            type: number
+            format: int64
+            minimum: 1
+            maximum: 100
+      responses:
+        '200':
+          description: a delete message
+          content:
+            application/json:
+              schema:
+                type: string
+                items:
+                  $ref: '#/components/schemas/T-Shirt'
+        '414':
+          description: URI too long
+    put:
+      summary: Updates a single T-Shirt  based on id
+      description: T-ShirtId is used
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: T-ShirtId for a specific T-Shirt
+          schema:
+            type: number
+            format: int64
+            minimum: 1
+            maximum: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/T-Shirt'
+      responses:
+        '200':
+          description: an object of T-Shirt
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/T-Shirt'
+        '414':
+          description: URI too long
+  /tshirt/{size}:
+    get:
+      summary: retrieves a T-Shirt  by size
+      description: size an identifying feature for T-Shirt
+      parameters:
+        - name: size
+          in: path
+          required: true
+          description: size to retrieve a T-Shirt by
+          schema:
+            type: string
+      responses:
+        '200':
+          description: an object of T-Shirt
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/T-Shirt'
+        '414':
+          description: URI too long
+  /tshirt/{color}:
+    get:
+      summary: retrieves a T-Shirt by color
+      description: color used to identify T-Shirts being searched
+      parameters:
+        - name: color
+          in: path
+          required: true
+          description: color used to retrieve T-Shirts by
+          schema:
+            tpye:  string
+      resonses:
+        '200':
+          description: an object of T-Shirt
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/T-Shirt'
+        '414':
+          description: URI too long
+  /purchase:
+    post:
+      summary: create a purchase based on fields entered
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Purchase'
+      response:
+        '200':
+          description: a Invoice object is returned
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Invoice'
+        '414':
+          description: URI too long
+
+
+
+
+components:
+  schemas:
+    Game:
+      type: object
+      properties:
+        gameId:
+          type: number
+        title:
+          type: string
+        rating:
+          type: string
+        description:
+          type: string
+        price:
+          type: string (decimal)
+        studio:
+          type: string
+        quantity:
+          type: integer
+      required:
+        - gameId
+        - title
+        - rating
+        - description
+        - price
+        - studio
+        - quantity
+
+    Console:
+      type: object
+      properties:
+        consoleId:
+          type: number
+        model:
+          type: string
+        manufacturer:
+          type: string
+        memory_amount:
+          type: string
+        processor:
+          type: string
+        price:
+          type: string
+        quantity:
+          type: integer
+      required:
+        - consoleId
+        - model
+        - manufacturer
+        - memory_amount
+        - processor
+        - price
+        - quantity
+
+    T-Shirt:
+      type: object
+      properties:
+        tshirtId:
+          type: number
+        size:
+          type: string
+        color:
+          type: string
+        description:
+          type: string
+        price:
+          type: string
+        quantity:
+          type: integer
+      required:
+        - tshirtId
+        - size
+        - color
+        - description
+        - price
+        - quantity
+
+    Purchase:
+      type: object
+      properties:
+        name:
+          type: string
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        itemType:
+          type: string
+        itemId:
+          type: integer
+        quantity:
+          type: integer
+      required:
+        - name
+        - street
+        - city
+        - state
+        - zip
+        - itemType
+        - itemId
+        - quantity
+    Invoice:
+      type: object
+      properties:
+        name:
+          type: string
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        itemType:
+          type: string
+        itemId:
+          type: integer
+        quantity:
+          type: integer
+        finalPrice:
+          type: string
+      required:
+        - name
+        - street
+        - city
+        - state
+        - zip
+        - itemType
+        - itemId
+        - quantity
+        - finalPrice
+
+
+
+
+
+
+
+
+

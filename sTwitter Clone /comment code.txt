@@ -1,0 +1,21 @@
+@Test
+    public void updateTest() throws Exception{
+        repo.deleteAll();
+        Comment comment = new Comment();
+        comment.setPostId(1);
+        comment.setCreateDate(LocalDate.of(2019,9,25));
+        comment.setCommenterName("Andrew");
+        comment.setComment("That is a nice post.");
+        repo.save(comment);
+        comment.setPostId(1);
+        comment.setCreateDate(LocalDate.of(2019,9,26));
+        comment.setCommenterName("Andrew");
+        comment.setComment("You should run for president!");
+        repo.save(comment);
+        Optional<Comment> comments = repo.findById(comment.getCommentId());
+        Comment c = null;
+        if(comments.isPresent()==true){
+            c= comments.get();
+        }
+        assertEquals(comment, c);
+    }

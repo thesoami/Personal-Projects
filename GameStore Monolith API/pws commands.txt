@@ -1,0 +1,9 @@
+PWS commands
+
+cd Desktop\GitUpload\Soami_Cohly_Coursework\SUMMATIVE\U2-M3-Summative-Cohly-Soami\SoamiCohlyU1Capstone
+
+mvnw -DskipTests=true package
+
+cf login -a api.run.pivotal.io
+
+cf push -f manifest.yml
